@@ -1,0 +1,447 @@
+
+#Space Invaders
+
+: player
+	0x10 0x7C 0xFE # height of 3
+
+: bullet
+	0x10 # height of 1
+
+: monster
+	0x24 0x7E 0x5A 0x7E # height of 4
+  
+: monsterl
+	0x1C 0x7F 0xFF 0xFF 0xFF 0xE3 0xE3 0xE3 0xFF 0xFF 0xFF # height of 11
+  
+: monsterr
+	0x38 0xFE 0xFF 0xFF 0xFF 0xC7 0xC7 0xC7 0xFF 0xFF 0xFF # height of 11
+  
+: zero
+  0xE0 0xA0 0xA0 0xA0 0xE0
+  
+: one
+	0x20 0x20 0x20 0x20 0x20
+
+: two
+	0xE0 0x20 0xE0 0x80 0xE0
+
+: three
+	0xE0 0x20 0xE0 0x20 0xE0
+
+: four
+	0xA0 0xA0 0xE0 0x20 0x20
+  
+: five
+	0xE0 0x80 0xE0 0x20 0xE0
+  
+: six
+	0xE0 0x80 0xE0 0xA0 0xE0
+
+: seven
+  0xE0 0x20 0x20 0x20 0x20
+  
+: eight  
+  0xE0 0xA0 0xE0 0xA0 0xE0
+  
+: nine  
+  0xE0 0xA0 0xE0 0x20 0xE0
+  
+: AM
+	0xF8 0x88 0xF8 0x88 0x88 0x00 0x88 0xD8 0xA8 0x88 0x88
+
+: MO
+	0x88 0xD8 0xA8 0x88 0x88 0x00 0xF8 0x88 0x88 0x88 0xF8
+  
+# Start of THINGS FOR THE WIN/LOSE/START SCREENS
+#for the win screen 
+: Y
+	0xC3 0xC3 0xC3 0xC3 0xFF 0xFF 0x18 0x18 0x18 0x18 0x18 
+
+: U
+	0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xFF 0xFF 
+
+: O
+  0xFF 0xFF 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xFF 0xFF 
+
+: W1
+  0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xFC 0xFC  
+  
+: W2
+	0x30 0x30 0x30 0x30 0x30 0x30 0x30 0x30 0x30 0xF0 0xF0 
+  
+: I
+	0xFF 0xFF 0x18 0x18 0x18 0x18 0x18 0x18 0x18 0xFF 0xFF 
+
+: N
+  0xFF 0xFF 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3
+  
+#for the title screen
+
+: i_title
+	0xFC 0xFC 0x30 0x30 0x30 0xFC 0xFC
+: n
+  0xF8 0xF8 0x88 0x88 0x88 0x88 0x88
+: v
+	0x84 0x84 0xCC 0xCC 0x48 0x78 0x30
+: a
+	0xFC 0xFC 0xCC 0xCC 0xFC 0xCC 0xCC
+: d
+	0xF0 0x98 0x8C 0x8C 0x8C 0x98 0xF0
+: e
+	0xFC 0x80 0x80 0xFC 0x80 0x80 0xFC
+: r
+	0xFC 0x84 0x84 0xFC 0x90 0x88 0x84
+: s
+	0xFC 0x80 0x80 0xFC 0x04 0x04 0xFC
+  
+: title
+  va := 3 #x pos
+  vb := 12 #y pos
+  i := i_title
+  sprite va vb 7
+  va := 11 #x pos
+  i := n
+  sprite va vb 7
+  va := 18 #x pos
+  i := v
+  sprite va vb 7
+  va := 26 #x pos
+  i := a
+  sprite va vb 7
+  va := 34 #x pos
+  i := d
+  sprite va vb 7
+  va := 41 #x pos
+  i := e
+  sprite va vb 7
+  va := 48 #x pos
+  i := r
+  sprite va vb 7
+  va := 55 #x pos
+  i := s
+  sprite va vb 7
+  va := 32
+  vb := 29
+  i := player
+  sprite va vb 3
+  i := monster
+  va := 12
+  vb := 5
+  sprite va vb 4
+  va := 45
+  vb := 5
+  sprite va vb 4
+;
+
+# winscreen displays the winner depending on the points
+: winscreen
+  va := 1 #x pos
+  vb := 10 #y pos
+  i := Y
+  sprite va vb 11
+  va := 10
+  i := O
+  sprite va vb 11
+  va := 19
+  i := U
+  sprite va vb 11
+  va := 33
+  i := W1
+  sprite va vb 11
+  va := 39
+  i := W2
+  sprite va vb 11
+  va := 45
+  i := I
+  sprite va vb 11
+  va := 55
+  i := N
+  sprite va vb 11
+ 
+;
+
+: L
+	0xC0 0xC0 0xC0 0xC0 0xC0 0xC0 0xC0 0xC0 0xC0 0xFC 0xFC 
+
+: S
+	0xFC 0xFC 0xC0 0xC0 0xC0 0xFC 0x0C 0x0C 0x0C 0xFC 0xFC 
+  
+: E
+	0xFC 0xFC 0xC0 0xC0 0xFC 0xFC 0xFC 0xC0 0xC0 0xFC 0xFC
+  
+: losescreen
+  va := 1 #x pos
+  vb := 10 #y pos
+  i := Y
+  sprite va vb 11
+  va := 10
+  i := O
+  sprite va vb 11
+  va := 19
+  i := U
+  sprite va vb 11
+  va := 34
+  i := L
+  sprite va vb 11
+  va := 41
+  i := O
+  sprite va vb 11
+  va := 50
+  i := S
+  sprite va vb 11
+  va := 57
+  i := E
+  sprite va vb 11
+;
+# End of THINGS FOR THE WIN/LOSE/START SCREENS
+  
+:alias playerx v0
+:alias playery v1
+:alias monsterx v2
+:alias monstery v3
+:alias bulletx v4
+:alias bullety v5
+:alias bulletf v6
+:alias monsterh v7
+:alias ammo v8
+:alias playermf v9
+:alias monstermf ve
+
+: main
+	title
+  v0 := 0
+  loop
+    v0 += 1
+    if v0 != 255 then
+  again
+  clear
+	
+	playermf := 0
+	playerx := 28
+  playery := 29
+  monsterx := 0
+  monstery := 0
+  monstermf := 1
+  bulletx := playerx
+  bullety := 28
+  bulletf := 0 # 0 when ready 1 when shot
+  monsterh := 5 # monsters health, 0 => dead
+  ammo := 10 # really only 9 ammo 10 only since game over after 10th is shot
+  
+  # Start Drawing Divider
+  va := 0
+  vb := 4
+  loop
+  	i := bullet
+    sprite vb va 1
+    va += 1
+  	if va != 32 then
+  again 
+  # end drawing divider
+  # Drawing AMMO
+  va := 1
+  vb := 1
+  i := AM
+  sprite va vb 11
+  vb := 13
+  i := MO
+  sprite va vb 11
+  # End Drawing AMMO
+  # Draw ammo score
+  va := 2
+  vb := 27
+  i := nine
+  sprite va vb 5
+  # End drawing ammo score
+  
+  # start drawing monster
+  monsterx := 30
+  monstery := 0
+  i := monsterl
+  sprite monsterx monstery 11
+  monsterx += 8
+  i := monsterr
+  sprite monsterx monstery 11
+  monsterx += -8
+  # end drawing monster
+  
+  # Draw Player
+  i := player
+  sprite playerx playery 3
+  # End Draw Player
+  
+  
+  
+  # Main Game loop
+  loop
+  	# Start Drawing player
+    i := player
+    if playermf == 0 begin
+    	if playerx != 8 begin
+      	sprite playerx playery 3
+    		playerx += -1
+        sprite playerx playery 3
+      else
+       	playermf := 1
+      end
+    end
+    if playermf == 1 begin
+    	if playerx != 57 begin
+      	sprite playerx playery 3
+    		playerx += 1
+        sprite playerx playery 3
+      else
+      	playermf := 0
+      end
+    end
+    # End Drawing player
+    # Start Drawing Monster
+    if monstermf == 0 begin
+    	if monsterx != 8 begin
+      	i := monsterl
+      	sprite monsterx monstery 11
+        monsterx += 8
+        i := monsterr
+        sprite monsterx monstery 11
+        monsterx += -1
+        sprite monsterx monstery 11
+        i := monsterl
+        monsterx += -8
+        sprite monsterx monstery 11
+     	else
+      	monstermf := 1
+      end
+    end
+    
+    if monstermf != 0 begin
+    	if monsterx != 48 begin
+      	i := monsterl
+        sprite monsterx monstery 11
+        monsterx += 8
+        i := monsterr
+        sprite monsterx monstery 11
+        monsterx += 1
+        sprite monsterx monstery 11
+        i := monsterl
+        monsterx += -8
+        sprite monsterx monstery 11
+      else
+      	monstermf := 0
+      end
+    end
+    
+    # End drawing monster
+   	# Start Drawing bullet
+    i := bullet
+    if bulletf == 0 begin
+    	va := 5
+      if va key begin
+      	bulletx := playerx
+        bullety := 28
+        bulletf := 1
+        i := bullet
+        sprite bulletx bullety 1
+        ammo += -1
+        vb := 2
+        vc := 27
+        if ammo == 9 begin
+      		i := nine
+          sprite vb vc 5
+          i := eight
+          sprite vb vc 5
+        end
+        if ammo == 8 begin
+          i := eight
+          sprite vb vc 5
+          i := seven
+          sprite vb vc 5
+        end
+        if ammo == 7 begin
+	        i := seven
+          sprite vb vc 5
+          i := six
+          sprite vb vc 5
+        end
+        if ammo == 6 begin
+        	i := six
+          sprite vb vc 5
+          i := five
+          sprite vb vc 5
+        end
+        if ammo == 5 begin
+        	i := five
+          sprite vb vc 5
+          i := four
+          sprite vb vc 5
+        end
+        if ammo == 4 begin
+        	i := four
+          sprite vb vc 5
+          i := three
+          sprite vb vc 5
+        end
+        if ammo == 3 begin
+        	i := three
+          sprite vb vc 5
+          i := two
+          sprite vb vc 5
+        end
+        if ammo == 2 begin
+        	i := two
+          sprite vb vc 5
+          i := one
+          sprite vb vc 5
+        end
+        if ammo == 1 begin
+        	i := one
+          sprite vb vc 5
+          i := 0
+          sprite vb vc 5
+        end
+      end
+    end
+    
+    i := bullet
+   	if bulletf == 1 begin
+    	sprite bulletx bullety 1
+    	bullety += -1
+      if bullety < 64 begin
+      	sprite bulletx bullety 1
+      end
+      
+      if bullety == 0 begin # Collision Check with boundry
+      	sprite bulletx bullety 1
+      	bulletf := 0
+      end
+			# Collision Check with Monster
+      va := monsterx
+      va += -3
+      vb := monstery
+      vb += 10
+			if bullety == vb begin
+      	if bulletx >= va  begin
+        	va += 15
+          if bulletx <= va begin
+          	sprite bulletx bullety 1
+          	bulletf := 0
+            monsterh += -1
+          end
+        end
+      end
+    end
+    # End Drawing bullet
+    
+    if ammo != 0 begin
+    	if monsterh != 0 begin
+				again
+			end
+    end 
+    
+    clear
+    if monsterh == 0 begin
+    	winscreen 
+    else 
+    	losescreen
+    end
+    loop
+    again

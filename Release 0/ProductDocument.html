@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-alpha/dist/katex.min.css" integrity="sha384-BTL0nVi8DnMrNdMQZG1Ww6yasK9ZGnUxL1ZWukXQ7fygA1py52yPp9W4wrR00VML" crossorigin="anonymous">
+        <style>
+/*--------------------------------------------------------------------------------------------- * Copyright (c) Microsoft Corporation. All rights reserved. * Licensed under the MIT License. See License.txt in the project root for license information. *--------------------------------------------------------------------------------------------*/ body { font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback"; font-size: 14px; padding: 0 26px; line-height: 22px; word-wrap: break-word; } #code-csp-warning { position: fixed; top: 0; right: 0; color: white; margin: 16px; text-align: center; font-size: 12px; font-family: sans-serif; background-color:#444444; cursor: pointer; padding: 6px; box-shadow: 1px 1px 1px rgba(0,0,0,.25); } #code-csp-warning:hover { text-decoration: none; background-color:#007acc; box-shadow: 2px 2px 2px rgba(0,0,0,.25); } body.scrollBeyondLastLine { margin-bottom: calc(100vh - 22px); } body.showEditorSelection .code-line { position: relative; } body.showEditorSelection .code-active-line:before, body.showEditorSelection .code-line:hover:before { content: ""; display: block; position: absolute; top: 0; left: -12px; height: 100%; } body.showEditorSelection li.code-active-line:before, body.showEditorSelection li.code-line:hover:before { left: -30px; } .vscode-light.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(0, 0, 0, 0.15); } .vscode-light.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(0, 0, 0, 0.40); } .vscode-light.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-dark.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 255, 255, 0.4); } .vscode-dark.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 255, 255, 0.60); } .vscode-dark.showEditorSelection .code-line .code-line:hover:before { border-left: none; } .vscode-high-contrast.showEditorSelection .code-active-line:before { border-left: 3px solid rgba(255, 160, 0, 0.7); } .vscode-high-contrast.showEditorSelection .code-line:hover:before { border-left: 3px solid rgba(255, 160, 0, 1); } .vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before { border-left: none; } img { max-width: 100%; max-height: 100%; } a { text-decoration: none; } a:hover { text-decoration: underline; } a:focus, input:focus, select:focus, textarea:focus { outline: 1px solid -webkit-focus-ring-color; outline-offset: -1px; } hr { border: 0; height: 2px; border-bottom: 2px solid; } h1 { padding-bottom: 0.3em; line-height: 1.2; border-bottom-width: 1px; border-bottom-style: solid; } h1, h2, h3 { font-weight: normal; } h1 code, h2 code, h3 code, h4 code, h5 code, h6 code { font-size: inherit; line-height: auto; } table { border-collapse: collapse; } table > thead > tr > th { text-align: left; border-bottom: 1px solid; } table > thead > tr > th, table > thead > tr > td, table > tbody > tr > th, table > tbody > tr > td { padding: 5px 10px; } table > tbody > tr + tr > td { border-top: 1px solid; } blockquote { margin: 0 7px 0 5px; padding: 0 16px 0 10px; border-left-width: 5px; border-left-style: solid; } code { font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback"; font-size: 14px; line-height: 19px; } body.wordWrap pre { white-space: pre-wrap; } .mac code { font-size: 12px; line-height: 18px; } pre:not(.hljs), pre.hljs code > div { padding: 16px; border-radius: 3px; overflow: auto; } /** Theming */ pre code { color: var(--vscode-editor-foreground); } .vscode-light pre:not(.hljs), .vscode-light code > div { background-color: rgba(220, 220, 220, 0.4); } .vscode-dark pre:not(.hljs), .vscode-dark code > div { background-color: rgba(10, 10, 10, 0.4); } .vscode-high-contrast pre:not(.hljs), .vscode-high-contrast code > div { background-color: rgb(0, 0, 0); } .vscode-high-contrast h1 { border-color: rgb(0, 0, 0); } .vscode-light table > thead > tr > th { border-color: rgba(0, 0, 0, 0.69); } .vscode-dark table > thead > tr > th { border-color: rgba(255, 255, 255, 0.69); } .vscode-light h1, .vscode-light hr, .vscode-light table > tbody > tr + tr > td { border-color: rgba(0, 0, 0, 0.18); } .vscode-dark h1, .vscode-dark hr, .vscode-dark table > tbody > tr + tr > td { border-color: rgba(255, 255, 255, 0.18); } 
+</style>
+<style>
+/* Tomorrow Theme */ /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */ /* Original theme - https://github.com/chriskempson/tomorrow-theme */ /* Tomorrow Comment */ .hljs-comment, .hljs-quote { color: #8e908c; } /* Tomorrow Red */ .hljs-variable, .hljs-template-variable, .hljs-tag, .hljs-name, .hljs-selector-id, .hljs-selector-class, .hljs-regexp, .hljs-deletion { color: #c82829; } /* Tomorrow Orange */ .hljs-number, .hljs-built_in, .hljs-builtin-name, .hljs-literal, .hljs-type, .hljs-params, .hljs-meta, .hljs-link { color: #f5871f; } /* Tomorrow Yellow */ .hljs-attribute { color: #eab700; } /* Tomorrow Green */ .hljs-string, .hljs-symbol, .hljs-bullet, .hljs-addition { color: #718c00; } /* Tomorrow Blue */ .hljs-title, .hljs-section { color: #4271ae; } /* Tomorrow Purple */ .hljs-keyword, .hljs-selector-tag { color: #8959a8; } .hljs { display: block; overflow-x: auto; color: #4d4d4c; padding: 0.5em; } .hljs-emphasis { font-style: italic; } .hljs-strong { font-weight: bold; }
+</style>
+<style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'HelveticaNeue-Light', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 id="cmpt-276--team-13">CMPT 276 | Team 13</h2>
+<p><strong><h1><font size = "7">
+Product Document: Release 0
+</font></h1></strong></p>
+<p><em><font size = "3">
+Group Members:
+Matthew Zegar, Larren Canapi, TJ Le, Mohammad Raad Sarr, Khanh Nam Tang, Varpreet Dhaliwal</font></em>
+<br></p>
+<p><strong><h1>Introduction </h1></strong></p>
+<font size = "3">
+Chip8 is a interpreted low-level programming language which runs programs like video games on 8-bit computers. Our project is to design and create a Chip8 emulator and visualizer that can run and display Chip8 programs on any modern web browser using Javascript. In addition, we need to create a software tool that would be helpful for a Chip8 developer and create at least two video games for our virtual machine. 
+</font>
+<br>
+<br>
+<p style="border:1px; border-style:solid; border-color:#FF000; padding: 1.5em; width: 380px; height: 320px;">
+<font size = "5"> 
+Table of Contents <br> 
+</font>
+<font size = "3">
+  1. <a href = "#Meeting"> Meeting Schedule </a> <br>
+  2. <a href = "#Communication"> Communication </a> <br>
+  3. <a href = "#Software"> Software Repository </a> <br>
+  4. <a href = "#Main"> Main Implementation Language, Libraries, and Tools </a> <br>
+  5. <a href = "#Software"> Software Methodology </a> <br>
+  6. <a href = "#Team"> Team Roles </a> <br>
+  7. <a href = "#Quality"> Quality Assurance and Testing </a> <br>
+  8. <a href = "#Work"> Work Breakdown </a> <br> 
+  9. <a href = "#Schedule"> Schedule </a> <br> 
+  10. <a href = "#Citations"> Citations and Resources | IEEE </a> <br> 
+</font>
+</p>
+<br>
+<p><strong><h1><a id = "Meeting"></a> Meeting Schedule</h1></strong></p>
+<font size = "3">
+As a group we have decided that we will have weekly team meetings on Mondays at 10:30am, lasting for 1 hour before our CMPT 276 lecture. If need be, we will host extra meetings on Wednesdays and Fridays at the same time. We will be hosting these meetings at the Surrey Campus in a team room or in the Computer Science Instructional Lab. There will also be online Discord meetings if we need to talk about an urgent problem and we cannot meet in person. Our main communication device, Discord, allows members to still attend meetings even if they can’t attend in person.
+</font>
+<br>
+<br>
+<p><strong><h1><a id = "Communication"></a> Communication</h1></strong></p>
+<font size = "3">
+The primary method of communication that our group will be using is Discord. The application allows us to both share files easily and to communicate through voice and text chat. It also allows us to separate our group conversations into different text channels, so our discussions about the project regarding things like resources or things to do will be organized into sections. For every major meeting, we will be taking meeting minutes so all of the important topics and problems we discuss in meetings are documented and if any member forgets what they are doing for the week, they can refer to their tasks in these documents. These meeting minutes will be stored in Google Drive. Along with this, the group has opted to use Trello as the main way to delegate tasks. With each meeting, we will work closely with Trello to get an update on each task's completion so that each group member is familiar with what each other is doing. As a result, we create a practical way to balance tasks and see the rate of progress between all group members.
+</font>
+<br>
+<br>
+<p><strong><h1><a id = "Software"></a>Software Repository</h1></strong></p>
+<font size = "3">
+We will be using a private Github repository as our version control software. We chose Github because it is a platform that all of our team members are familiar with and the abundant amount of support/tutorials it has online. Furthermore, Github's various tools/commands allows easy management of people's work. Matthew’s role as Github Master ensures that any merging of work on the project will not conflict with the master branch for our project so there are no inconsistencies or problems.  
+</font>
+<br>
+<br>
+<p><strong><h1><a id = "Main"></a>Main Implementation Language, Libraries, and Tools</h1></strong></p>
+<font size = "3">
+As most members of the group already have a good understanding of Javascript, it will be our programming language of choice for the project. As a result, it allows our group to immediately get started on programming for the assignment while not spending too much time learning syntax. 
+<p>Libraries will be determined in future releases of this document as more insight is gained when we start coding. During the time of this current release, the graphics library we will be testing with is p5.js, which is a library that is accessible for newcomers to the language and will be helpful when we eventually code our Chip8 emulator.</p>
+<p>Node.js is a cross-platform Javascript runtime environment that we are considering using, so we can compile code outside of a web browser. As suggested in class, we are considering on using Sublime Merge as a way to visualize the changes that are happening to our repository. Finally, Jest is an application that allows us to test Javascript code, similar to the assert command in C++.</p>
+<p>Visual Studio Code will be the Integrated Developer Environment (IDE) of choice due to the extensive support and extensions it provides for Javascript programming. Visual Studio Code also provides a built in Source Control with Git and a Debug Menu which will be helpful when coding such a large scale project.
+</font></p>
+<br>
+<br>
+<p><strong><h1><a id = "Software"></a>Software Methodology</h1></strong></p>
+<font size = "3">
+The completion of the project will be structured by the Incremental Method which follows multiple procedures of plan, specify, design, implement, and test in order to create multiple iterations of the project. We decided that each release should go through a mini-waterfall process where we incrementally create and improve our project. In addition, we decided against the Waterfall Method because of our inexperience of planning a project for a semester long scale and doing phases in order does not allow for flexibility in our schedule.
+<p>Following the Incremental Method at the start of each new release, we will plan and specify what specific feature we want to implement and design an efficient way for all team members to work on the new features with the requirement specifications. Implementation will have all team members working to create the desired goal of having the current release programmed into a working form. Finally, testing will be done through various unit, validation, and system testing (more details in the testing section).</p>
+<p>We also decided to use “reuse-oriented software engineering” where we use pre-built software to write our code for the project as it requires much less work for implementation and most of our members have experience in our IDE of choice, Visual Studio Code.
+</font></p>
+<br>
+<br>
+<p><strong><h1><a id = "Team"></a>Team Roles</h1></strong></p>
+<font size = "3">
+The structure of team roles will follow mostly an interchangeable format where roles will be loosely dictated because of the wide array of skill sets our team members possess. However, we have a few roles defined below that group members will default to for each release. As a result, we decided to work on each section of the project together, instead of assigning specific roles/tasks like emulator programmer or video game programmer to a single person. 
+</font>
+<br>
+<br>
+<br>
+<p><strong><h2>Role Breakdown</h2></strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Name</strong></th>
+<th style="text-align:left"><strong>Major</strong></th>
+<th style="text-align:left"><strong>Role</strong></th>
+<th style="text-align:left"><strong>Expertise</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Matthew Zegar</strong></td>
+<td style="text-align:left">Software Systems</td>
+<td style="text-align:left">Github Master, Programmer</td>
+<td style="text-align:left">Javascript experience</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Larren Canapi</strong></td>
+<td style="text-align:left">Software Systems</td>
+<td style="text-align:left">Project Manager, Programmer</td>
+<td style="text-align:left">Project Management Experience</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>TJ Le</strong></td>
+<td style="text-align:left">Computer Science</td>
+<td style="text-align:left">Programmer, Tester</td>
+<td style="text-align:left">Assembly Language</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Raad Sarr</strong></td>
+<td style="text-align:left">Computer Science</td>
+<td style="text-align:left">Programmer</td>
+<td style="text-align:left">Assembly Language</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Khanh Nam Tang</strong></td>
+<td style="text-align:left">Computer Science</td>
+<td style="text-align:left">Programmer, Tester</td>
+<td style="text-align:left">General Programming</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Varpreet Dhaliwal</strong></td>
+<td style="text-align:left">Math/Computer Science</td>
+<td style="text-align:left">Programmer</td>
+<td style="text-align:left">Javascript experience</td>
+</tr>
+</tbody>
+</table>
+<br>
+<br>
+<p><strong><h2>Role Descriptions</h2></strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Role</strong></th>
+<th style="text-align:left"><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Programmer</td>
+<td style="text-align:left">Responsible for writing code for the project, helps with the general design of the emulator, visualizer, tool, and games</td>
+</tr>
+<tr>
+<td style="text-align:left">Project Manager</td>
+<td style="text-align:left">Responsible for looking over each team members work, helps to lead team meetings, assigns tasks to members, and helps to resolve general conflicts</td>
+</tr>
+<tr>
+<td style="text-align:left">Tester</td>
+<td style="text-align:left">Responsible for doing unit, system, and acceptance testing for the project. Reports immediate problems to the entire group and how we should resolve them</td>
+</tr>
+<tr>
+<td style="text-align:left">Github Master</td>
+<td style="text-align:left">Responsible for overlooking any merge requests the team creates, and accepting them into the master branch, while having a good level of experience with Git and Github</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p><strong><h1><a id = "Planned"></a>Planned Use Cases</h1></strong></p>
+<font size = "3">
+<p>The primary use case for Release 0, is to have our current product document completed which will be for organizational use for our team. The team will be refering to the product document constantly as it details the specifics of our software methodology and practices we intend to follow. In addition, the product document will be used to see the schedule and work breakdown of our project, so every team member is aware of what general tasks need to be completed. It also provides a documentation to inform Prof. Toby Donaldson and TA Faraz Shamshirdar, how our group is progressing with the project.</p>
+<p>There are many use cases for Release 1, because the goal for Release 1 is to create the Chip8 emulator with a prototype visualizer. Firstly, Release 1 provides educational purposes for the team because we will be competent in Javascript and Assembly/Machine language from the experience which will be helpful in coding the future software updates. The use case is that our group members will be able to learn how emulation of hardware works. As a result, all group members will use the knowledge gained in Release 1 to create the later requirements for the project, specifically the visualizer. Secondly, Release 1 will be used by the team and other people interested in Chip8 programming for operational purposes, because the emulator will be able to take in inputs like various programs, and play them on the web page. Our team and other programmers can use the emulator to display output to the screen, therefore it can serve as a simple testing grounds for running Chip8 programs.</p>
+<p>However, for the final release, we have two planned use cases for our final software. One will be for <strong>educational purposes</strong> because a student can use our emulator to learn about how old computers that used Chip8 can function and work. In addition, students can learn how one can use Javascript in order to emulate old computer software onto a modern web browser. The visualizer in our emulator will also be able to teach students how memory and registers are executed in a computer program.</p>
+<p>Secondly, our software is intended to be used by <strong>people who play video games</strong> because the emulator will be able to run classic video games like Pong and Breakout. As a result, gamers can learn how these old video games looked like and how they were played.
+</font></p>
+<br>
+<p><strong><h1><a id = "Quality"></a>Quality Assurance and Testing</h1></strong></p>
+<font size = "3">
+As we start designing and implementing the Chip8 project, the group will run into bugs and errors in the assignment. As a result, testing will be done using a variety of different methods discussed in the book and in class in order to fix these issues. The group has decided to use Jest as our testing software for the project, we are looking to do automated testing with this suite to handle specific bugs.
+<p>Coding conventions are expected to be followed in order to mitigate the amount of syntax errors that we encounter. Furthermore, coding conventions allow for consistency in our releases because everyone is coding in a similar design pattern. The designated testers can be found in the team roles section.</p>
+<br>
+<p><strong>Unit/Development Testing</strong> <br>
+All group members are expected to find and fix bugs as they program during development. Since we are using GitHub, all six members can pull from the master branch and test each component of the project independently and simultaneously. Any major complications found while coding individually is expected to be reported to the entire group. It is expected that all group members will help each other solve bugs/problems they encounter.</p>
+<br>
+<p><strong>System/Release Testing</strong> <br>
+After the development and implementation of the current release is finished, we expect all team members to do extensive testing of the merged system before the due date. The group members are expected to write test files using Jest in order to test various new and old features of the project. Group members are expected to look over each others test.
+In the example of the emulator, we will be testing previously completed Chip8 programs to ensure there are no new bugs. Github master will be responsible for reviewing and testing all committed instances of the program before updating the master branch.</p>
+<br>
+<p><strong>Acceptance/User Testing</strong> <br>
+We plan to consult with other CMPT 276 groups to help aid in testing  our finished product. Various methods could include letting users try out our Chip8 games on our emulator, and reporting back to our group on bugs/problems they encounter. The group members are expected to treat each report seriously and resolve all issues other groups discover.</p>
+</font>
+<br>
+<p><strong><h1><a id = "Work"></a>Work Breakdown</h1></strong></p>
+<font size = "3">
+The following section breaks down each major feature of the project into smaller parts detailing the incremental model of software development that we are following.
+</font>
+<h3 id="chip8-emulator-br"><strong>Chip8 Emulator</strong> <br></h3>
+<font size = "3">
+<ul>
+<li>
+<p>Plan <br>
+Creating the emulator tool first will be our highest priority, we are estimating it will be done by Release 1 and will take around 3 weeks to finish. The entire team is tasked to work on the emulator. All team members are expected to read documentation and tutorials about Chip8 found online. These resources can be found in the citations and resources section below. Group discussion is highly encouraged during this stage so every group member is educated on the topic.</p>
+</li>
+<li>
+<p>Specify <br>
+Specifically, we want to create a virtual machine that can run any Chip8 program that we either create or find online. The virtual machine must be able to take input from the user in the form of a program and must be able to print output to the screen. Since the full visualizer is not implemented yet, we will be using a simple canvas screen to display programs until it can be improved.</p>
+</li>
+<li>
+<p>Design <br>
+The team is expected to discuss and draw how the emulator should look like while running on the webpage. In addition, good universal conventions should be discussed and agreed upon by the group to be followed for the rest of the project. As a result, the code will have good organization of features like memory, operation codes and registers for the program.</p>
+</li>
+<li>
+<p>Implementation <br>
+The emulator is expected to be coded in a common machine langauge that can be run in a Javascript file. The Github Repository will constantly be updated so the team doesn't get far behind on the work.</p>
+</li>
+<li>
+<p>Test <br>
+Constant unit and system testing will be done on a day by day basis to ensure that the emulator is consistently running correctly. Refactoring will be a key element after testing to ensure that the project is organized and efficient. Jest will be used for testing as well.</p>
+</li>
+</ul>
+</font>
+<br>
+<h3 id="chip8-visualizer-br"><strong>Chip8 Visualizer</strong> <br></h3>
+<font size = "3">
+<ul>
+<li>
+<p>Plan <br>
+After the emulator is done for Release 1, it is expected that Release 2 will have the visualizer fully implemented which we estimate will take 2 to 3 weeks to finish. All team members are expected to know a decent amount of Javascript knowledge to procede with the project.</p>
+</li>
+<li>
+<p>Specify <br>
+The visualizer should display a Chip8 program but have more features than the previous simple visualizer that Release 1 included. Along the bottom and sides of the screen, the visualizer will show the memory, registers and instructions being executed. In addition, a simple keyboard layout will display on the screen showing the input that the user presses in the given moment.</p>
+</li>
+<li>
+<p>Design <br>
+In order to design the visualizer, the team will create draft diagrams of what the visualizer will look like to the user. As a result, the team will have a greater understanding of the expectations for this release. However, design for the visualizer is tentative as the group will constantly discuss it's design and identify the constraints we are put under and how to work around them.</p>
+</li>
+<li>
+<p>Implementation <br>
+The visualizer will be implemented using Javascript and assembly/machine language. The various menus and displays for the visualizer will need to be put in multiple files so that all the code is organized. Further information will be provided in further documentation.</p>
+</li>
+<li>
+<p>Test <br>
+The visualizer will be tested with various unit and system testing. We will be finding video games and running them on the Chip8 Emulator and Visualizor and see if the graphical quality is to a high standard. In addition, constant maintenance will be done to fix bugs in the pause, step-forward, and step-backward features of the program.</p>
+</li>
+</ul>
+</font>
+<br>
+<h3 id="chip8-tool-br"><strong>Chip8 Tool</strong> <br></h3>
+<font size = "3">
+<ul>
+<li>
+<p>Plan <br>
+We plan to allocate 2 to 3 weeks to coding our Chip8 tool. The Chip8 tool is the part of the project that the team is the most unsure about with it's design and implementation, however current ideas are specified below. Future product documents will have an update to this section. We plan to have the entire team working on the Chip8 tool during this iteration.</p>
+</li>
+<li>
+<p>Specify <br>
+As development for the Chip8 emulator and visualizer is being accomplished, we will continue to think of an idea for our Chip8 tool. Our current idea is to create a graphics editor to create sprites for our Chip8 games. It would be a simple editor that allows the user to connect pixels together to create sprites of their choosing.</p>
+</li>
+<li>
+<p>Design <br>
+The team is expected to draw diagrams of how the tool should look and be implemented. We will also be discussing how we would program such a tool during this phase as well.</p>
+</li>
+<li>
+<p>Implementation <br>
+We expect to implement the tool by creating a visualizer with a working user interface. Further implementation will be documented at a later date.</p>
+</li>
+<li>
+<p>Test <br>
+Constant unit and system testing is necessary when creating the tool of our choice. We will likely do acceptance testing with other groups and use their feedback to improve/fix any bugs in the program.</p>
+</li>
+</ul>
+</font>
+<br>
+<h3 id="chip8-game-1-pong-br"><strong>Chip8 Game 1: Pong</strong> <br></h3>
+<font size = "3">
+<ul>
+<li>
+<p>Plan <br>
+We plan on allocating 1 to 2 weeks to coding our Pong game for the project. We want to have all team members working on it, but worse case scenario have at least 2 people working on it. Assigned group members will be asked to review Javascript, Chip8 programming, and basic game programming.</p>
+</li>
+<li>
+<p>Specify <br>
+The game needs to play a two-player version of Pong, it will be using the keyboard to control the paddles and the win condition will be first to five wins.</p>
+</li>
+<li>
+<p>Design <br>
+Assigned group members are expected to design basic diagrams, and research online how to code Pong in a high-level programming language familiar to them. In addition, studying the game mechanics of Pong along with the physics of the ball.</p>
+</li>
+<li>
+<p>Implementation <br>
+Assigned members are expected to start coding in assembly/machine language once the previous stages are finished. They are encouraged to work with each other and create the game in stages. For example, creating a moving ball, adding bounds checking, then finally adding moving paddles.</p>
+</li>
+<li>
+<p>Test <br>
+Multiple unit and system testing will take place during development. However, acceptance testing will be heavily used as we will ask other group member/other teams to try out our game.</p>
+</li>
+</ul>
+</font>
+<br>
+<h3 id="chip8-game-2-breakout-br"><strong>Chip8 Game 2: Breakout</strong> <br></h3>
+<font size = "3">
+<ul>
+<li>
+<p>Plan <br>
+We plan on allocating around 1 to 2 weeks to create our second game, Breakout. Breakout is an excellent game to program because the ideas of Pong are further built upon when coding Breakout. At this moment in time, all previous work for the project should be completed and all attention should be put forth to finish the last game. Assigned group members will be asked to review Javascript, Chip8 programming, basic game programming, and look at the source code for game 1.</p>
+</li>
+<li>
+<p>Specify <br>
+The game needs to be a single player game of breakout. The paddle is controlled using the keyboard, and the player must break all of the blocks in order to win the game. The player loses if the ball escapes the screen, the player will have 3 attempts at breaking all the parts.</p>
+</li>
+<li>
+<p>Design <br>
+The team will be looking into how to design the user interface for the game, and study the game Breakout in a langauge familiar to them. In addition, a study of simple bounds checking and hit detection in games will be necessary.</p>
+</li>
+<li>
+<p>Implementation <br>
+Like game 1, the team is expected to start coding in assembly/machine language once the previous stages are finished. We plan to make game 2 the last program for the assignment so it is expected that everyone is working together.</p>
+</li>
+<li>
+<p>Test <br>
+Much of testing is similar to game 1, various unit and system testing will be done in the implementation phase, but acceptance testing will be our primary source.</p>
+</li>
+</ul>
+</font>
+<br>
+<p><strong><h1><a id = "Schedule"></a>Schedule</h1></strong>
+<font size = "3">
+The following information details the work schedule that the team will refer to for deadlines for our project. In addition, we have documented smaller deadlines for the group to follow for each release down below. A disclaimer is that these following schedules is tentative, and we will need to adjust the deadlines and work schedules constantly in order to resolve unforeseen conflicts in the future.</p>
+<p>Furthermore, the schedule is under the assumption that all team members are going to be putting an equal effort towards the project. Observing every team members class schedule, and each of us having either 3 to 4 courses for the semester. SFU recommends studying 2-3 hours for each credit for the course a week, as a result each team member must commit an average of 6 to 9 hours for the course per week. However, it is expected that time spent on the project is due to fluctuate, with the team working more or less hours on certain weeks.</p>
+<p>When calculating risk management, our two main risks come from project and product risks. Project risks can arise because all team members can potentially be busy with other classes and commitments, and thus work for the project can be behind schedule. We plan to solve the issue with good communication and planning for more meetings if we fall behind schedule. Product risks can occur when coding the project as problems such as the program being too inefficient can arise. We will solve the issue by having a high &quot;Bus Factor&quot; taught in class, all team members are expected to be knowledgeable of the information required to complete the project as we take the first two weeks of the project to learn about Chip8 programming.</p>
+</font>
+<br>
+<p><img src="https://cdn.discordapp.com/attachments/428768808031748098/535935306139041821/Gantt_Chart_Schedule.PNG" alt="Term"></p>
+<br>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Major Task</strong></th>
+<th style="text-align:left"><strong>Start Date</strong></th>
+<th style="text-align:left"><strong>End Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Product Doc/Presentation</td>
+<td style="text-align:left">January 3rd</td>
+<td style="text-align:left">January 21st</td>
+</tr>
+<tr>
+<td style="text-align:left">Chip8 Emulator</td>
+<td style="text-align:left">January 21rd</td>
+<td style="text-align:left">February 6th</td>
+</tr>
+<tr>
+<td style="text-align:left">Chip8 Visualizer</td>
+<td style="text-align:left">February 6th</td>
+<td style="text-align:left">February 27th</td>
+</tr>
+<tr>
+<td style="text-align:left">Chip8 Tool</td>
+<td style="text-align:left">February 27th</td>
+<td style="text-align:left">March 13th</td>
+</tr>
+<tr>
+<td style="text-align:left">Game 1</td>
+<td style="text-align:left">March 6th</td>
+<td style="text-align:left">March 15th</td>
+</tr>
+<tr>
+<td style="text-align:left">Game 2</td>
+<td style="text-align:left">March 15th</td>
+<td style="text-align:left">April 1st</td>
+</tr>
+<tr>
+<td style="text-align:left">Testing</td>
+<td style="text-align:left">January 3rd</td>
+<td style="text-align:left">April 8th</td>
+</tr>
+<tr>
+<td style="text-align:left">Final Testing</td>
+<td style="text-align:left">April 1st</td>
+<td style="text-align:left">April 8th</td>
+</tr>
+</tbody>
+</table>
+<br>
+<font size = "3">
+Release 1
+<p>The first release will have our members focus on creating the Chip8 emulator for the project. With some of our group members being experienced in Javascript and Assembly/Machine language, we expect the work to be done in roughly 16 days.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Major Task</strong></th>
+<th style="text-align:left"><strong>Start Date</strong></th>
+<th style="text-align:left"><strong>End Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Planning/Designing Emulator</td>
+<td style="text-align:left">January 21st</td>
+<td style="text-align:left">January 22th</td>
+</tr>
+<tr>
+<td style="text-align:left">Writing Operation Codes</td>
+<td style="text-align:left">January 22st</td>
+<td style="text-align:left">January 25th</td>
+</tr>
+<tr>
+<td style="text-align:left">Implementing Memory, Registers, CPU</td>
+<td style="text-align:left">January 25st</td>
+<td style="text-align:left">January 31st</td>
+</tr>
+<tr>
+<td style="text-align:left">Implementing Emulator</td>
+<td style="text-align:left">February 1st</td>
+<td style="text-align:left">February 6th</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>Release 2</p>
+<p>For our second release, we want to start work on the Chip8 Visualizer for the project, showing we can have a better visual output for the user. Due to the complex demands in the  visualizer section of the project, we have allocated 21 days to accomplish the task.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Major Task</strong></th>
+<th style="text-align:left"><strong>Start Date</strong></th>
+<th style="text-align:left"><strong>End Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Planning/Designing Visualizer</td>
+<td style="text-align:left">February 6th</td>
+<td style="text-align:left">February 8th</td>
+</tr>
+<tr>
+<td style="text-align:left">Memory/Register/Instruction Visualization</td>
+<td style="text-align:left">February 8th</td>
+<td style="text-align:left">February 14th</td>
+</tr>
+<tr>
+<td style="text-align:left">Feature to pause Visualizer</td>
+<td style="text-align:left">February 14th</td>
+<td style="text-align:left">February 19th</td>
+</tr>
+<tr>
+<td style="text-align:left">Feature to step-forward and step-backward in Visualizer by 1 step</td>
+<td style="text-align:left">February 19th</td>
+<td style="text-align:left">February 26th</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>Release 3</p>
+<p>Our third release will include our Chip8 tool in addition to the start of our game programming for the project. At the start of the release, we expect to have an idea for our tool and as a result, the following schedule is subject to change. For coding our game 1 which is Pong, we will start experimenting with coding the controls and physics in the game.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Major Task</strong></th>
+<th style="text-align:left"><strong>Start Date</strong></th>
+<th style="text-align:left"><strong>End Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Planning/Designing Chip8 Tool</td>
+<td style="text-align:left">February 27th</td>
+<td style="text-align:left">February 28th</td>
+</tr>
+<tr>
+<td style="text-align:left">Coding Chip8 Tool</td>
+<td style="text-align:left">February 28th</td>
+<td style="text-align:left">March 12th</td>
+</tr>
+<tr>
+<td style="text-align:left">Design/Plan Game 1</td>
+<td style="text-align:left">March 6th</td>
+<td style="text-align:left">March 8th</td>
+</tr>
+<tr>
+<td style="text-align:left">Coding Game 1 Physics</td>
+<td style="text-align:left">March 8th</td>
+<td style="text-align:left">March 10th</td>
+</tr>
+<tr>
+<td style="text-align:left">Coding Game 1 Paddles</td>
+<td style="text-align:left">March 10th</td>
+<td style="text-align:left">March 12th</td>
+</tr>
+</tbody>
+</table>
+<br>
+<p>Release 4</p>
+<p>The final release will encompass the completion of game 1, and the full process of creating game 2 which is Breakout. Team members are expected to complete game 1 first, in order to translate the knowledge learned to creating game 2. We expect to stop programming 1 to 2 weeks before the project is due to allow our team to refactor our project for final submission.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>Major Task</strong></th>
+<th style="text-align:left"><strong>Start Date</strong></th>
+<th style="text-align:left"><strong>End Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Finish Game 1</td>
+<td style="text-align:left">March 13th</td>
+<td style="text-align:left">March 15th</td>
+</tr>
+<tr>
+<td style="text-align:left">Design/Plan Game 2</td>
+<td style="text-align:left">March 15th</td>
+<td style="text-align:left">March 17th</td>
+</tr>
+<tr>
+<td style="text-align:left">Implement player controls/physics in Game 2</td>
+<td style="text-align:left">March 17th</td>
+<td style="text-align:left">March 21st</td>
+</tr>
+<tr>
+<td style="text-align:left">Implement game assets like bricks in Breakout</td>
+<td style="text-align:left">March 21st</td>
+<td style="text-align:left">April 1st</td>
+</tr>
+<tr>
+<td style="text-align:left">Final Refactoring of all code</td>
+<td style="text-align:left">April 1st</td>
+<td style="text-align:left">April 7th</td>
+</tr>
+</tbody>
+</table>
+<br>
+</font>
+<p><strong><h1><a id = "Citations"></a>Citations and Resources | IEEE</h1></strong></p>
+<p>Cowgod's Chip-8 Technical Reference. [Online]. Available: <a href="http://devernay.free.fr/hacks/chip8/C8TECH10.HTM">http://devernay.free.fr/hacks/chip8/C8TECH10.HTM</a>. [Accessed: 18-Jan-2019].</p>
+<p>“Learn X in Y minutes Where X=javascript,” Learn swift in Y Minutes. [Online]. Available: <a href="https://learnxinyminutes.com/docs/javascript/">https://learnxinyminutes.com/docs/javascript/</a>. [Accessed: 18-Jan-2019].</p>
+<p>Mattmikolay, “mattmikolay/chip-8,” GitHub. [Online]. Available: <a href="https://github.com/mattmikolay/chip-8/wiki/CHIP%E2%80%908-Technical-Reference">https://github.com/mattmikolay/chip-8/wiki/CHIP‐8-Technical-Reference</a>. [Accessed: 18-Jan-2019].</p>
+<p>M. Cone, “Basic Syntax,” Cheat Sheet | Markdown Guide. [Online]. Available: <a href="https://www.markdownguide.org/basic-syntax/">https://www.markdownguide.org/basic-syntax/</a>. [Accessed: 18-Jan-2019].</p>
+<p>“Welcome,” Emulator 101 - Welcome. [Online]. Available: <a href="http://www.emulator101.com/welcome.html">http://www.emulator101.com/welcome.html</a>. [Accessed: 18-Jan-2019].</p>
+<br>
+<p align="center">
+Product document drafted in Google Docs, Markdown coded in Visual Studio Code
+<br>
+Created with the help of Markdown All in One Extension (Yu Zhang, 2018)
+</p>
+<br>
+<br>
+    </body>
+    </html>

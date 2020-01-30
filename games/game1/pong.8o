@@ -1,0 +1,346 @@
+###########################################
+#
+#  Pong
+#
+#  Plays the arcade game Pong for 2 players
+#
+###########################################
+
+: ball
+  0x80
+  
+: paddle
+  0x80 0x80 0x80 0x80 0x80 0x80 0x80 0x80
+  
+: line
+  0x80 0x80 0x80 0x00 0x80 0x80 0x80 0x00 0x80 0x80 0x80 0x00 0x80 0x80 0x80
+  
+: P
+  0xFF 0xFF 0xC3 0xC3 0xC3 0xFF 0xFF 0xC0 0xC0 0xC0 0xC0 
+  
+: O
+  0xFF 0xFF 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xFF 0xFF 
+
+: N
+  0xFF 0xFF 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3 0xC3
+
+: G
+  0xFF 0xFF 0xC0 0xC0 0xC0 0xDF 0xDF 0xC3 0xC3 0xFF 0xFF
+  
+: I
+	0xFF 0xFF 0x18 0x18 0x18 0x18 0x18 0x18 0x18 0xFF 0xFF 
+ 
+: W1
+  0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xCC 0xFC 0xFC  
+  
+: W2
+	0x30 0x30 0x30 0x30 0x30 0x30 0x30 0x30 0x30 0xF0 0xF0 
+  
+: one
+	0xF8 0xF8 0x18 0x18 0x18 0x18 0x18 0x18 0x18 0xFF 0xFF 
+
+: two
+	0xFF 0xFF 0x03 0x03 0x03 0xFF 0xC0 0xC0 0xC0 0xFF 0xFF
+  
+: three
+	0xFF 0xFF 0x07 0x07 0xFF 0xFF 0xFF 0x07 0x07 0xFF 0xFF 
+  
+: four
+	0xC3 0xC3 0xC3 0xC3 0xFF 0xFF 0x03 0x03 0x03 0x03 0x03 
+  
+: five
+	0xFF 0xFF 0xC0 0xC0 0xC0 0xFF 0xFF 0x03 0x03 0xFF 0xFF 
+
+# title screen for the game
+: title
+  i := P 
+  va := 12
+  vb := 10
+  sprite va vb 11
+  va := 22
+  i := O
+  sprite va vb 11
+  va := 32
+  i := N
+  sprite va vb 11
+  va := 42
+  i := G
+  sprite va vb 11
+;
+  
+# adds a scoreboard display everytime a player scores a point
+# first to 5 wins the game
+: scoreboard
+	i := P 
+  va := 6
+  vb := 5
+  sprite va vb 11
+  va := 38
+  sprite va vb 11
+  i := one
+  va := 16
+  sprite va vb 11
+  i := two
+  va := 48
+  sprite va vb 11
+  
+  if v0 == 0 begin
+		i := O
+    va := 10
+  	vb := 19
+  	sprite va vb 11
+	end
+  
+  if v0 == 1 begin
+  	i := one
+    va := 12
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v0 == 2 begin
+  	i := two
+    va := 12
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v0 == 3 begin
+  	i := three
+    va := 12
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v0 == 4 begin
+  	i := four
+    va := 12
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v0 == 5 begin
+  	i := five
+    va := 12
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+##############################
+  if v9 == 0 begin
+		i := O
+    va := 43
+  	vb := 19
+  	sprite va vb 11
+	end
+
+  if v9 == 1 begin
+  	i := one
+    va := 43
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v9 == 2 begin
+  	i := two
+    va := 43
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v9 == 3 begin
+  	i := three
+    va := 43
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v9 == 4 begin
+  	i := four
+    va := 43
+  	vb := 19
+  	sprite va vb 11
+  end
+  
+  if v9 == 5 begin
+  	i := five
+    va := 43
+  	vb := 19
+  	sprite va vb 11
+  end
+;  
+
+# winscreen displays the winner depending on the points
+: winscreen
+	i := P 
+  va := 6
+  vb := 9
+  sprite va vb 11
+	if v0 == 5 begin
+    i := one
+    va := 16
+    sprite va vb 11
+  else
+    i := two
+    va := 16
+    sprite va vb 11
+  end
+  va := 29
+  i := W1
+  sprite va vb 11
+  va := 35
+  i := W2
+  sprite va vb 11
+  va := 41
+  i := I
+  sprite va vb 11
+  va := 51
+  i := N
+  sprite va vb 11
+ 
+;
+  
+: main
+  title
+  v0 := 0
+  loop
+    v0 += 1
+    if v0 != 255 then
+  again
+
+  
+  va := 32 # the ball's horizontal position
+  vb := 16 # the ball's vertical position
+  vc :=  2 # the ball's horizontal direction
+  vd :=  2 # the ball's vertical direction
+  
+  v1 :=  4 # left paddle horizontal position 
+  v2 := 12 # left paddle vertical position 
+  v3 := 60 # right paddle horizontal position
+  v4 := 12 # right paddle vertical position 
+  v9 := 10 # timer for sound
+  
+  v9 := 0 # p1 score
+  v0 := 0 # p2 score
+
+  loop
+  
+    if va > 0 begin
+      if va < 64 begin
+        i  := ball #draw ball
+        sprite va vb 1
+      end
+    end
+    i := paddle #draw paddles
+    sprite v1 v2 8
+    sprite v3 v4 8
+
+		#move the ball
+    va += vc
+    vb += vd
+    
+    #ball has reached the top or bottom boundaries so reverse the direction
+    if vb == 32 begin
+      vd := -2
+      buzzer := v1
+    end
+    
+    if vb == 0 begin
+      vd :=  2
+      buzzer := v1
+    end
+
+    #left paddle has missed the ball so reset it
+    if va <= 2 begin
+    	v9 += 1 
+    	scoreboard
+      buzzer := v1
+      va := 32
+      vb := 16
+      vc := -2
+      ve := 0
+      loop
+        ve += 1
+        if ve != 100 then
+      again
+    end
+    
+    #right paddle has missed the ball so reset it
+    if va >= 64 begin
+    	v0 += 1 
+    	scoreboard
+      buzzer := v1
+      va := 32
+      vb := 16
+      vc := 2
+      ve := 0
+      loop
+        ve += 1
+        if ve != 100 then
+      again
+    end
+    
+    v5 := 4 if v5 key begin 
+      if v2 != 0 then v2 += -2 # up for left paddle, bounds checking so we don't go out of bounds
+    end
+    v5 := 7 if v5 key begin
+      if v2 != 24 then v2 += 2  # down for left paddle
+    end
+    
+    v6 := 6 if v6 key begin
+      if v4 != 0 then v4 += -2 # up for right paddle
+    end 
+    v6 := 9 if v6 key begin
+      if v4 != 24 then v4 += 2 # down for right paddle
+    end
+    
+    #left paddle collision
+    v8 := v1
+    v8 += 1
+    if va < v8 begin
+      v8 += -3
+      if va >= v8 begin
+        v7 := v2
+        v7 += 8
+        if v7 >= vb begin
+          if vb >= v2 begin
+            vc := 2
+            buzzer := v1
+          end
+        end
+      end
+    end
+    
+    #right paddle collision
+    v8 := v3
+    v8 += -1
+    if va >= v8 begin
+      v8 += 3
+      if va <= v8 begin
+        v7 := v4
+        v7 += 8
+        if v7 >= vb begin
+          if vb >= v4 begin
+            vc := -2
+            buzzer := v1
+          end
+        end
+      end
+    end
+    
+    clear
+    
+    #check if any player has reached to 5 points, if they did, then quit the game loop
+		if v0 == 5 then v3 := 61
+    
+    if v9 == 5 then v3 := 61
+    
+    if v3 != 61 then
+  again
+  
+  #display the game winner to the user
+  winscreen
+  loop 
+  again
+
+
