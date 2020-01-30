@@ -1,0 +1,26 @@
+body {
+    background-color: #363237;
+}
+
+/*https://stackoverflow.com/questions/5127937/how-to-center-canvas-in-html5*/
+canvas{
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+}
+
+th {
+    color: black;
+}
+
+center { 
+    margin-right: 355px;
+}
+
+.table {
+    margin: auto;
+    width: 50% !important; 
+    table-layout: fixed;
+ }
+
+

@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <!--Import bootstrap-->
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.css" crossorigin="anonymous">
+  <meta charset="utf-8">
+
+  <title>Test suite for Chip8 class</title>
+
+  <div class="jumbotron text-center">
+        <h1>Chip8CPU Testing</h1>
+        <p></p> 
+   </div>
+
+</head>
+
+<body>
+  <canvas id="canvas" width="640" height="320" style="border:2px solid #000000;"></canvas>
+  <script src="class.js"></script>
+  <script src="Chip8CPUtest.js"></script>
+
+  <!-- Table for registers/stack/etc -->
+  <table class="table table-bordered table-striped text-center">
+    <thead>
+      <tr>
+        <th scope="col">Test</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="col">IBM: <span id="IBM"></span></th>
+
+      </tr>
+      <tr>
+        <th scope="col">Chip8: <span id="Chip8pic"></span></th>
+
+      </tr>
+      <tr>
+        <th scope="col">Maze: <span id="Maze"></span></th>
+
+      </tr>
+    </tbody>
+  </table>
+  
+
+</body>
+</html>

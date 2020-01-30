@@ -1,0 +1,53 @@
+# TEAM 13 Product Document
+
+## Meeting Schedule
+- Our group has decided on two different time slots depending on the workload of the project
+- Monday and Wednesday for approximately 30-60 mins after the 276 lecture
+
+## Communication
+- The main tool that our group will be using alongside our weekly meetings is Discord
+- Discord allows us to share files and communicate ideas through text and voice chat
+
+## Software
+- We will be using a private GitHub repository as our version control
+
+## Team Roles
+- The structure of team roles will follow mostly a interchangeable format where some roles will be loosely dictated
+- As the project develops the members of the group will slowly find themselves in roles that they can excel in
+- The table below shows the current tasks that each member will begin working on; however, it is highly subject to change
+
+| **Name** | **Roles** |
+| :-- | :-- |
+| Matthew Zegar | Chip8 emulator |
+| Larren Canapi | Chip8 games |
+| TJ Le | Chip8 visualizer |
+| Raad Sarr | Chip8 visualizer |
+| Khanh Nam Tang | Chip8 tool |
+
+## Testing (TBD)
+- Using existing Chip8 programs we can test our emulator in a variety of different cases
+- Alongside the development of our Chip8 emulator a testing suite will be also created
+
+# Tools
+- Javascript will be the primary language used
+- VScode is the IDE of choice
+- Libraries will be determined as project develops
+
+# Planned Use Cases (TBD)
+- detailed use cases for all major features planned for the next release
+
+# Work Breakdown
+- Chip8 Emulator
+  - Creating the Emulator tool first will be our highest priority, estimating it will be done by Release 1 (3 weeks)
+- Chip8 Visualizer
+  - After creating the emulator, we plan on creating the visualizer which we estimate will be done by Release 2 (3 weeks)
+- Chip8 Tool
+  - We decided to start work on the Chip8 tool after Release 2 and have it completed Release 3 or Release 4. (2 - 4 weeks)
+  - We plan on having the tool be useful in our creation for the Chip8 games that we create like a Graphics Editor, but the idea of the tool will be finalized as the project develops.
+- Chip8 Games 
+  - We plan to start working on the games after Release 2, and have at least 1 game ready for Release 3. The other one will be done before Release 4.
+  - We initially plan to code simple games like Pong and Breakout which we estimate will take about 1 week for each game
+  - Complex or original games will be created if time permits, we estimate that would take 2 weeks
+  
+# Schedule
+![Graph](https://raw.githubusercontent.com/mzegar/CMPT276/master/graph.png?token=Aeqdvd2QA1O9axyfbHEhfMao1kHUTf1lks5cOnf3wA%3D%3D "Gantt Chart")
