@@ -5,3 +5,12 @@ Chip8 is an interpreted low-level programming language which runs programs like 
 Our team was tasked to create a Chip8 emulator and visualizer that can run and display Chip8 programs on any modern web browser using Javascript.
 
 Main website: emulator/index.html
+
+Demo:
+![](homePage.png)
+
+![](sprite.png)
+
+![](SpaceInvander.png)
+
+![](Pong.png)
